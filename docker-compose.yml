@@ -1,19 +1,6 @@
 version: "3"
 
 services:
-  dwm-postgres:
-    image: postgres
-    container_name: dwm-postgres
-    environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-    ports:
-      - '${DB_PORT}:5432'
-    volumes:
-      - dwm-postgres-data:/data
-    networks:
-      - dwm-network
-
   dwm-api:
     build: .
     container_name: dwm-api
@@ -25,11 +12,6 @@ services:
       - "${API_PORT}:3333"
     networks:
       - dwm-network
-    depends_on:
-      - dwm-postgres
-
-volumes:
-  dwm-postgres-data:
 
 networks:
   dwm-network:
